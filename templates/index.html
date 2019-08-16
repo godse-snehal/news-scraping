@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Weather News</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .top-buffer{
+      margin-top:-40px;
+    }
+  
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <h3>Latest Mars News</h3>
+    <div class="news-title" style="font-size: 30;"><strong>{{ data.news_title}}</strong></div>
+    <p class="news-text">{{ data.news_p}}</p>
+
+    <br/>
+    <h3>Featured Mars Image</h3>
+    <div class="row">
+      <div class="col-lg-8">
+        <img class="img1" src="{{ data.featured_image_url }}" alt="Featured Mars Image" height=600px width=800px/>
+      </div>
+      <div class="col-lg-4">
+        <div class="row">
+            <div class="card mb-1 top-buffer" style="width: 25rem;">
+                <div class="card-body"> 
+                  <h4 class="card-title"><b></b>Current weather on Mars</b></h5>
+                  <p class="card-text">{{ data.mars_weather }}</p>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <h4>Mars Facts</h4>
+              <div id="dict-string">
+                  {{ data.facts_html_string|safe }}
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <br/><br/><br/><br/>
+    <div>
+      <p style="text-align: center; font-size: 2rem; font-weight: bold">Mars Hemispheres</p>
+      <hr/>
+      <div class="container">
+      <div class="row justify-content-md-center mx-lg-n5">
+        {% for hemisphere in data.hemisphere_image_urls %}
+        <div class="col-sm-6 py-3 px-lg-5">
+          <div class="card-deck">
+            <div class="card">
+              <img src="{{hemisphere.img_url}}" class="card-img-top img-responsive" alt="..." />
+              <div class="card-body">
+                <p class="card-text">{{ hemisphere.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+
+    </div>
+    
+    
+
+    
+     
+    
+    
+  </div>
+
+</body>
+
+</html>
